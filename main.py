@@ -1,11 +1,9 @@
 def main():
-    path = "books/frankenstein.txt"
+    path = input("Please enter the file name: ")
     text = read_contents(path)
     num_words = word_count(text)
-    chars = char_count(text)
-    char_list = list(chars.items())
-    char_list.sort(key=lambda x: x[1], reverse=True)
-    print_report(path, num_words, char_list)
+    char_count_list = sorted(char_count(text), key=lambda x: x[1], reverse=True)
+    print_report(path, num_words, char_count_list)
 
 def read_contents(path):
     with open(path) as file:
@@ -22,7 +20,7 @@ def char_count(file_contents):
             letters_dic[letter] += 1
         else:
             letters_dic[letter] = 1
-    return letters_dic
+    return list(letters_dic.items())
 
 def print_report(path, word_count, char_list):
     print(f"--- Begin report of {path} ---")
